@@ -1,18 +1,18 @@
 <p align="center">
-  <img src="docs/logo.svg" alt="FreeYou logo" width="120" />
+  <img src="docs/logo.svg" alt="Toll logo" width="120" />
 </p>
 
-<h1 align="center">FreeYou</h1>
+<h1 align="center">Toll</h1>
 
-<p align="center"><strong>Stop the doom-scroll. Wake your brain up.</strong></p>
+<p align="center"><strong>Every reel costs you. Toll makes it literal.</strong></p>
 
-FreeYou is a small browser extension that makes it slightly annoying to keep scrolling reels and endless feeds. Every time you try to swipe to the next Short, Reel, or auto-load more of your homepage, it pops up a quick math problem. Solve it and you can move on. Get it wrong and you have to wait.
+Toll is a small browser extension that charges you a math problem every time you try to advance a Short, a Reel, or auto-load more of your homepage feed. Solve it and you pass. Get it wrong and you wait.
 
-That tiny bit of friction is the whole point. It breaks the reflex.
+That tiny toll is the whole point. It breaks the reflex.
 
 ## What it does
 
-### On Reels and Shorts
+### Reels and Shorts
 
 Scrolling, swiping, or arrow-keying to the next reel is blocked. Instead you get a math gate. The video pauses while you solve.
 
@@ -24,21 +24,21 @@ Works on: **YouTube Shorts**, **Facebook Reels**, **Instagram Reels**, **TikTok*
   <img src="docs/screenshots/facebook-reel.png" alt="Facebook Reels with math gate" width="45%" />
 </p>
 
-### On Home feeds
+### Home feeds
 
-The infinite scroll on YouTube's homepage and Facebook's news feed is capped. You get about two screens of content, and to load more you have to solve a math problem.
+The infinite scroll on YouTube's homepage and Facebook's news feed is capped. You get about two screens of content, and to load more you pay a toll.
 
 <p align="center">
-  <img src="docs/screenshots/facebook-timeline.png" alt="Facebook timeline capped by FreeYou" width="60%" />
+  <img src="docs/screenshots/facebook-timeline.png" alt="Facebook timeline capped by Toll" width="60%" />
 </p>
 
-### Every wrong answer costs time
+### Wrong answers cost more
 
 Get one wrong and you're locked out for a few seconds. Get the next one wrong too and it goes up: 5s, then 15s, then 30s, then 60s. Button-mashing is punished.
 
 ## Install in about two minutes
 
-FreeYou works in any Chromium browser: **Arc**, **Google Chrome**, **Brave**, **Edge**, or **Opera**. You do not need to be a developer to install it.
+Toll works in any Chromium browser: **Arc**, **Google Chrome**, **Brave**, **Edge**, or **Opera**. You do not need to be a developer to install it.
 
 ### Step 1. Get the code
 
@@ -46,12 +46,12 @@ FreeYou works in any Chromium browser: **Arc**, **Google Chrome**, **Brave**, **
 
 1. Click the green **Code** button near the top of this page.
 2. Click **Download ZIP**.
-3. Unzip the file. You should see a folder like `FreeYou-main` with `manifest.json` inside it.
+3. Unzip the file. You should see a folder with `manifest.json` inside it.
 
 **Option B: Clone with git**
 
 ```bash
-git clone https://github.com/sohag-pro/FreeYou.git
+git clone https://github.com/sohag-pro/Toll.git
 ```
 
 ### Step 2. Open the extensions page
@@ -74,7 +74,7 @@ Find the **Developer mode** toggle in the top-right corner of the extensions pag
 
 1. Click **Load unpacked**.
 2. Pick the folder you unzipped (the one with `manifest.json` in it, not the folder above it).
-3. FreeYou should now appear in your extension list.
+3. Toll should now appear in your extension list.
 
 ### Step 5. Try it
 
@@ -121,7 +121,7 @@ Yes. Open `src/core.js` and edit the constants near the top:
 - `CAP_INITIAL_PAGES`: how many screens of feed you get before the first gate (default `2`).
 - `CAP_STEP_PAGES`: how many more screens you get per solved gate (default `1`).
 
-After editing, go back to the extensions page and click the **reload** icon on the FreeYou card.
+After editing, go back to the extensions page and click the **reload** icon on the Toll card.
 
 **Does it work on Safari or Firefox?**
 Not yet. Chromium browsers only (Arc, Chrome, Brave, Edge, Opera). Safari and Firefox use a different extension format.
