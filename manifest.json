@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "FreeYou — Reel Doom-Scroll Breaker",
+  "name": "FreeYou: Reel Doom-Scroll Breaker",
   "version": "0.1.0",
   "description": "Blocks scroll-to-next-reel on YouTube Shorts, Facebook Reels, Instagram Reels, and TikTok. Requires solving math problems to advance.",
   "permissions": ["storage"],

@@ -230,7 +230,7 @@
         stopEvent(e);
         throttleTrigger("next", "extend");
       }
-      // End tries to jump to bottom — always block in cap mode.
+      // End tries to jump to bottom, so always block in cap mode.
       if (e.key === "End") {
         stopEvent(e);
         throttleTrigger("next", "extend");
