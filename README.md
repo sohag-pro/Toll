@@ -6,6 +6,11 @@
 
 <p align="center"><strong>Every reel costs you. Toll makes it literal.</strong></p>
 
+<p align="center">
+  <a href="https://github.com/sohag-pro/Toll/releases/latest"><img src="https://img.shields.io/github/v/release/sohag-pro/Toll?label=download&color=4c8dff" alt="Download latest release" /></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-6f7684" alt="MIT license" /></a>
+</p>
+
 Toll is a small browser extension. Every time you try to advance a Short, a Reel, or auto-load more of your homepage feed, it asks you to solve a quick math problem first. Solve it and you pass. Get it wrong and you wait.
 
 That tiny toll is the whole point. It breaks the reflex.
@@ -40,15 +45,15 @@ Get one wrong and you're locked out for a few seconds. Get the next one wrong to
 
 Toll works in any Chromium browser: **Arc**, **Google Chrome**, **Brave**, **Edge**, or **Opera**. You do not need to be a developer to install it.
 
-### Step 1. Get the code
+### Step 1. Get the files
 
-**Option A: Download the ZIP (easiest)**
+**Option A: Download the latest release (recommended)**
 
-1. Click the green **Code** button near the top of this page.
-2. Click **Download ZIP**.
-3. Unzip the file. You should see a folder with `manifest.json` inside it.
+1. Go to the [latest release](https://github.com/sohag-pro/Toll/releases/latest).
+2. Under **Assets**, download `toll-vX.Y.Z.zip`.
+3. Unzip it. You should see a folder with `manifest.json` inside.
 
-**Option B: Clone with git**
+**Option B: Clone with git (for developers)**
 
 ```bash
 git clone https://github.com/sohag-pro/Toll.git
@@ -142,6 +147,8 @@ Not from a UI yet. For now, uninstall or open the site in a different browser pr
 ## Contributing
 
 Bug reports and site-detection fixes: open an issue with the URL and a note on what stopped working. Small PRs welcome. For larger changes, open an issue first so we can agree on scope.
+
+Maintainers can produce a release ZIP with `./scripts/build.sh`. The output lands in `dist/` and is what gets attached to GitHub releases.
 
 ## License
 
