@@ -7,7 +7,7 @@
     if (p === "/" || p === "/home.php" || p.startsWith("/home")) return "cap";
     return "off";
   }
-  function apply() { window.FreeYou.setMode(classify()); }
+  function apply() { window.Toll.setMode(classify()); }
   apply();
   let lastPath = location.pathname;
   setInterval(() => {

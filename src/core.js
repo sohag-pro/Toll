@@ -1,4 +1,4 @@
-// FreeYou core: reel scroll blocker + infinite-scroll cap. Both gated by math modal.
+// Toll core: reel scroll blocker + infinite-scroll cap. Both gated by math modal.
 
 (function () {
   const PROBLEMS_PER_GATE = 3;
@@ -95,10 +95,10 @@
     for (const v of allVideos()) {
       try {
         if (!v.paused) {
-          v.dataset.freeyouPaused = "1";
+          v.dataset.tollPaused = "1";
           v.pause();
-        } else if (v.dataset.freeyouPaused == null) {
-          v.dataset.freeyouPaused = "0";
+        } else if (v.dataset.tollPaused == null) {
+          v.dataset.tollPaused = "0";
         }
       } catch (_) {}
     }
@@ -107,8 +107,8 @@
   function resumeVideos() {
     for (const v of allVideos()) {
       try {
-        const wasPaused = v.dataset.freeyouPaused;
-        delete v.dataset.freeyouPaused;
+        const wasPaused = v.dataset.tollPaused;
+        delete v.dataset.tollPaused;
         if (wasPaused === "1") {
           const p = v.play();
           if (p && p.catch) p.catch(() => {});
@@ -123,7 +123,7 @@
       for (const v of allVideos()) {
         if (!v.paused) {
           try { v.pause(); } catch (_) {}
-          if (v.dataset.freeyouPaused == null) v.dataset.freeyouPaused = "1";
+          if (v.dataset.tollPaused == null) v.dataset.tollPaused = "1";
         }
       }
     }, 250);
@@ -212,7 +212,7 @@
   function onKey(e) {
     if (state.mode === "off") return;
     const t = e.target;
-    if (t && t.closest && t.closest("#freeyou-root")) return;
+    if (t && t.closest && t.closest("#toll-root")) return;
 
     const downKeys = ["ArrowDown", "PageDown", "End", "j", "J", " ", "Spacebar"];
     const upKeys = ["ArrowUp", "PageUp", "Home", "k", "K"];
@@ -294,7 +294,7 @@
   function ensureRoot() {
     if (rootEl) return rootEl;
     rootEl = document.createElement("div");
-    rootEl.id = "freeyou-root";
+    rootEl.id = "toll-root";
     (document.body || document.documentElement).appendChild(rootEl);
     return rootEl;
   }
@@ -328,10 +328,10 @@
     openBackdrop(state.mode === "reel");
     const remain = Math.ceil((state.lockedUntil - Date.now()) / 1000);
     rootEl.innerHTML = `
-      <div class="freeyou-backdrop">
-        <div class="freeyou-card">
-          <div class="freeyou-title">Locked out</div>
-          <div class="freeyou-sub">Wrong answers add up. Wait <span id="fy-countdown">${remain}</span>s.</div>
+      <div class="toll-backdrop">
+        <div class="toll-card">
+          <div class="toll-title">Locked out</div>
+          <div class="toll-sub">Wrong answers add up. Wait <span id="fy-countdown">${remain}</span>s.</div>
         </div>
       </div>`;
     const el = rootEl.querySelector("#fy-countdown");
@@ -361,24 +361,24 @@
       ? "Solve to load more"
       : (direction === "next" ? "Solve to advance (next reel)" : "Solve to advance (previous reel)");
     const badge = action === "extend"
-      ? "FreeYou · More feed"
-      : `FreeYou · ${direction === "next" ? "Next reel" : "Previous reel"}`;
+      ? "Toll · More feed"
+      : `Toll · ${direction === "next" ? "Next reel" : "Previous reel"}`;
 
     function render(errMsg) {
       const p = problems[idx];
       rootEl.innerHTML = `
-        <div class="freeyou-backdrop">
-          <div class="freeyou-card">
-            <div class="freeyou-badge">${badge}</div>
-            <div class="freeyou-title">${label} (${idx + 1}/${problems.length})</div>
-            <div class="freeyou-problem">${p.text} = ?</div>
-            <input class="freeyou-input" id="fy-input" type="text" inputmode="numeric" autocomplete="off" autofocus />
-            <div class="freeyou-err">${errMsg || ""}</div>
-            <div class="freeyou-actions">
-              <button id="fy-submit" class="freeyou-btn primary">Submit</button>
-              <button id="fy-cancel" class="freeyou-btn">Cancel</button>
+        <div class="toll-backdrop">
+          <div class="toll-card">
+            <div class="toll-badge">${badge}</div>
+            <div class="toll-title">${label} (${idx + 1}/${problems.length})</div>
+            <div class="toll-problem">${p.text} = ?</div>
+            <input class="toll-input" id="fy-input" type="text" inputmode="numeric" autocomplete="off" autofocus />
+            <div class="toll-err">${errMsg || ""}</div>
+            <div class="toll-actions">
+              <button id="fy-submit" class="toll-btn primary">Submit</button>
+              <button id="fy-cancel" class="toll-btn">Cancel</button>
             </div>
-            <div class="freeyou-hint">Wrong = escalating lockout. Break the reflex.</div>
+            <div class="toll-hint">Wrong = escalating lockout. Break the reflex.</div>
           </div>
         </div>`;
       const input = rootEl.querySelector("#fy-input");
@@ -449,7 +449,7 @@
 
   // ---------- Public API ----------
 
-  window.FreeYou = {
+  window.Toll = {
     setMode(mode, opts) {
       opts = opts || {};
       state.scrollTarget = opts.scrollTarget || null;

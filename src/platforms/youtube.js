@@ -9,16 +9,16 @@
 
   function apply() {
     const m = classify();
-    window.FreeYou.setMode(m);
+    window.Toll.setMode(m);
   }
 
-  window.FreeYou.onAdvance(function (dir) {
+  window.Toll.onAdvance(function (dir) {
     const sel = dir === "next"
       ? '#navigation-button-down button, ytd-shorts button[aria-label*="Next" i]'
       : '#navigation-button-up button, ytd-shorts button[aria-label*="Previous" i]';
     const btn = document.querySelector(sel);
     if (btn) { btn.click(); return; }
-    window.FreeYou.defaultAdvance(dir);
+    window.Toll.defaultAdvance(dir);
   });
 
   apply();

@@ -5,7 +5,7 @@
       /^\/[^/]+\/reels/.test(p);
   }
   function apply() {
-    window.FreeYou.setActive(isReelUrl());
+    window.Toll.setActive(isReelUrl());
   }
   apply();
   let lastPath = location.pathname;
