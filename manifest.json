@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "FreeYou: Reel Doom-Scroll Breaker",
+  "name": "Toll: pay math to keep scrolling",
   "version": "0.1.0",
-  "description": "Blocks scroll-to-next-reel on YouTube Shorts, Facebook Reels, Instagram Reels, and TikTok. Requires solving math problems to advance.",
+  "description": "Every reel costs you. Toll makes it literal. Solve a math problem to advance the next Short or Reel, or to load more of your homepage feed. YouTube, Facebook, Instagram, TikTok.",
   "permissions": ["storage"],
   "host_permissions": [
     "*://*.youtube.com/*",
@@ -41,7 +41,7 @@
     }
   ],
   "action": {
-    "default_title": "FreeYou",
+    "default_title": "Toll",
     "default_popup": "src/popup.html",
     "default_icon": {
       "16": "src/icons/icon-16.png",
