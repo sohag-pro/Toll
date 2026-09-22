@@ -49,7 +49,7 @@ FreeYou works in any Chromium browser: **Arc**, **Google Chrome**, **Brave**, **
 **Option B: Clone with git**
 
 ```bash
-git clone https://github.com/<your-username>/FreeYou.git
+git clone https://github.com/sohag-pro/FreeYou.git
 ```
 
 ### Step 2 — Open the extensions page
