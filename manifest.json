@@ -1,0 +1,47 @@
+{
+  "manifest_version": 3,
+  "name": "FreeYou — Reel Doom-Scroll Breaker",
+  "version": "0.1.0",
+  "description": "Blocks scroll-to-next-reel on YouTube Shorts, Facebook Reels, Instagram Reels, and TikTok. Requires solving math problems to advance.",
+  "permissions": ["storage"],
+  "host_permissions": [
+    "*://*.youtube.com/*",
+    "*://*.facebook.com/*",
+    "*://*.instagram.com/*",
+    "*://*.tiktok.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["*://*.youtube.com/*"],
+      "js": ["src/core.js", "src/platforms/youtube.js"],
+      "css": ["src/style.css"],
+      "run_at": "document_start",
+      "all_frames": false
+    },
+    {
+      "matches": ["*://*.facebook.com/*"],
+      "js": ["src/core.js", "src/platforms/facebook.js"],
+      "css": ["src/style.css"],
+      "run_at": "document_start",
+      "all_frames": false
+    },
+    {
+      "matches": ["*://*.instagram.com/*"],
+      "js": ["src/core.js", "src/platforms/instagram.js"],
+      "css": ["src/style.css"],
+      "run_at": "document_start",
+      "all_frames": false
+    },
+    {
+      "matches": ["*://*.tiktok.com/*"],
+      "js": ["src/core.js", "src/platforms/tiktok.js"],
+      "css": ["src/style.css"],
+      "run_at": "document_start",
+      "all_frames": false
+    }
+  ],
+  "action": {
+    "default_title": "FreeYou",
+    "default_popup": "src/popup.html"
+  }
+}
