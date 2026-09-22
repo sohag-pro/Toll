@@ -148,7 +148,7 @@ Not from a UI yet. For now, uninstall or open the site in a different browser pr
 
 Bug reports and site-detection fixes: open an issue with the URL and a note on what stopped working. Small PRs welcome. For larger changes, open an issue first so we can agree on scope.
 
-Maintainers can produce a release ZIP with `./scripts/build.sh`. The output lands in `dist/` and is what gets attached to GitHub releases.
+Maintainers can produce a release ZIP with `./scripts/build.sh`. The output lands in `dist/` and is what gets attached to GitHub releases. Pushing a `vX.Y.Z` tag triggers `.github/workflows/release.yml`, which builds the ZIP and publishes a release automatically. The tag version must match `version` in `manifest.json`.
 
 ## License
 
