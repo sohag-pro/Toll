@@ -1,6 +1,10 @@
-# FreeYou
+<p align="center">
+  <img src="docs/logo.svg" alt="FreeYou logo" width="120" />
+</p>
 
-**Stop the doom-scroll. Wake your brain up.**
+<h1 align="center">FreeYou</h1>
+
+<p align="center"><strong>Stop the doom-scroll. Wake your brain up.</strong></p>
 
 FreeYou is a small browser extension that makes it *slightly annoying* to keep scrolling reels and endless feeds. Every time you try to swipe to the next Short, Reel, or auto-load more of your homepage, it pops up a quick math problem. Solve it, and you can move on. Get it wrong, and you have to wait.
 
