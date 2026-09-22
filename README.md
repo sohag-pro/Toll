@@ -6,7 +6,7 @@
 
 <p align="center"><strong>Every reel costs you. Toll makes it literal.</strong></p>
 
-Toll is a small browser extension that charges you a math problem every time you try to advance a Short, a Reel, or auto-load more of your homepage feed. Solve it and you pass. Get it wrong and you wait.
+Toll is a small browser extension. Every time you try to advance a Short, a Reel, or auto-load more of your homepage feed, it asks you to solve a quick math problem first. Solve it and you pass. Get it wrong and you wait.
 
 That tiny toll is the whole point. It breaks the reflex.
 
@@ -91,7 +91,7 @@ That is it. Nothing to sign up for, nothing sent anywhere.
 
 ## How to use it
 
-Just browse normally. When the gate appears:
+Browse normally. When the gate appears:
 
 1. Read the math problem (for example `47 × 3`).
 2. Type the answer.
@@ -139,6 +139,10 @@ Not from a UI yet. For now, uninstall or open the site in a different browser pr
 - `src/platforms/*.js`: one per site. Watches the URL and picks a mode: `reel`, `cap`, or `off`.
 - No permissions beyond `storage` and access to the four sites listed in `manifest.json`.
 
+## Contributing
+
+Bug reports and site-detection fixes: open an issue with the URL and a note on what stopped working. Small PRs welcome. For larger changes, open an issue first so we can agree on scope.
+
 ## License
 
-MIT. Do what you like with it. If it helps you scroll less, that is the point.
+MIT. See [LICENSE](LICENSE). If it helps you scroll less, that is the point.
