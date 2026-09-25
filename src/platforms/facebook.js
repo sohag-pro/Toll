@@ -7,7 +7,15 @@
     if (p === "/" || p === "/home.php" || p.startsWith("/home")) return "cap";
     return "off";
   }
-  function apply() { window.Toll.setMode(classify()); }
+  let settings = window.Toll.DEFAULT_SETTINGS;
+  function effectiveMode() {
+    const raw = classify();
+    const fb = settings.facebook || {};
+    if (raw === "reel" && !fb.reel) return "off";
+    if (raw === "cap" && !fb.cap) return "off";
+    return raw;
+  }
+  function apply() { window.Toll.setMode(effectiveMode()); }
 
   function visible(el) {
     if (!el) return false;
@@ -38,6 +46,9 @@
     if (btn) { btn.click(); return; }
     window.Toll.defaultAdvance(dir);
   });
+
+  window.Toll.readSettings((s) => { settings = s; apply(); });
+  window.Toll.onSettingsChange((s) => { settings = s; apply(); });
 
   apply();
   let lastPath = location.pathname;

@@ -489,7 +489,46 @@
 
   // ---------- Public API ----------
 
+  const DEFAULT_SETTINGS = {
+    youtube: { reel: true, cap: true },
+    facebook: { reel: true, cap: true },
+    instagram: { reel: true },
+    tiktok: { reel: true },
+  };
+
+  function readSettings(cb) {
+    try {
+      chrome.storage.sync.get({ toll_settings: DEFAULT_SETTINGS }, (r) => {
+        const s = r && r.toll_settings ? r.toll_settings : DEFAULT_SETTINGS;
+        cb(mergeSettings(DEFAULT_SETTINGS, s));
+      });
+    } catch (_) {
+      cb(DEFAULT_SETTINGS);
+    }
+  }
+
+  function mergeSettings(base, over) {
+    const out = {};
+    for (const k of Object.keys(base)) {
+      out[k] = Object.assign({}, base[k], (over && over[k]) || {});
+    }
+    return out;
+  }
+
+  function onSettingsChange(cb) {
+    try {
+      chrome.storage.onChanged.addListener((changes, area) => {
+        if (area !== "sync" || !changes.toll_settings) return;
+        const next = changes.toll_settings.newValue || DEFAULT_SETTINGS;
+        cb(mergeSettings(DEFAULT_SETTINGS, next));
+      });
+    } catch (_) {}
+  }
+
   window.Toll = {
+    DEFAULT_SETTINGS,
+    readSettings,
+    onSettingsChange,
     setMode(mode, opts) {
       opts = opts || {};
       state.scrollTarget = opts.scrollTarget || null;

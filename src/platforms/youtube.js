@@ -7,10 +7,18 @@
     return "off";
   }
 
-  function apply() {
-    const m = classify();
-    window.Toll.setMode(m);
+  let settings = window.Toll.DEFAULT_SETTINGS;
+  function effectiveMode() {
+    const raw = classify();
+    const yt = settings.youtube || {};
+    if (raw === "reel" && !yt.reel) return "off";
+    if (raw === "cap" && !yt.cap) return "off";
+    return raw;
   }
+  function apply() { window.Toll.setMode(effectiveMode()); }
+
+  window.Toll.readSettings((s) => { settings = s; apply(); });
+  window.Toll.onSettingsChange((s) => { settings = s; apply(); });
 
   window.Toll.onAdvance(function (dir) {
     const sel = dir === "next"
