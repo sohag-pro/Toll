@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Toll: pay math to keep scrolling",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Every reel costs you. Toll makes it literal. Solve a math problem to advance the next Short or Reel, or to load more of your homepage feed. YouTube, Facebook, Instagram, TikTok.",
   "permissions": ["storage"],
   "host_permissions": [

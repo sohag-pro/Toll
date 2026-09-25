@@ -19,13 +19,13 @@ That tiny toll is the whole point. It breaks the reflex.
 
 - **Reel gate** on YouTube Shorts, Facebook Reels, Instagram Reels, TikTok. Scroll, swipe, arrow-keys, and the on-screen next/previous buttons are all intercepted.
 - **Feed cap** on YouTube home + feed pages and the Facebook news feed. First two screens are free, then each unlock loads one more.
-- **Math gate** — three problems per unlock, addition/subtraction/multiplication.
-- **Escalating lockout** on wrong answers: 5s → 15s → 30s → 60s. One correct answer resets the streak.
+- **Math gate**: three problems per unlock, addition, subtraction, or multiplication.
+- **Escalating lockout** on wrong answers: 5s, 15s, 30s, 60s. One correct answer resets the streak.
 - **Video auto-pause** while the gate is up on reels; resumes when you solve or cancel.
-- **Control panel** in the toolbar popup: per-platform, per-mode toggles (Shorts vs. feed cap, etc.). Changes apply live — no page reload.
-- **Time counter** in the top-right of each site — small pill that pops in on load and every few minutes of active use, showing today's time on that site. Only counts while the tab is visible and focused.
+- **Control panel** in the toolbar popup. Per-platform, per-mode toggles (Shorts vs. feed cap, and so on). Changes apply live, no page reload.
+- **Time counter** in the top-right of each site. A small pill pops in on load and every few minutes of active use, showing today's time on that site. Only counts while the tab is visible and focused.
 - **Daily totals** per site listed in the popup. Auto-rolls over at local midnight, keeps 30 days of history.
-- **Local-only** — everything lives in `chrome.storage.local`. No servers, no accounts, no telemetry. Permissions: `storage` and the four site hosts.
+- **Local-only.** Everything lives in `chrome.storage.local`. No servers, no accounts, no telemetry. Permissions: `storage` and the four site hosts.
 
 ## What it does
 
@@ -147,7 +147,7 @@ Not yet. Chromium browsers only (Arc, Chrome, Brave, Edge, Opera). Safari and Fi
 Reels and feeds change layouts often. Open an issue and I will update the site detection.
 
 **Can I disable it on one site but not another?**
-Yes. Click the Toll icon in the toolbar and flip the switch for that site (or just that mode — for example, keep Shorts gated but let the YouTube homepage run free). Changes apply immediately on open tabs.
+Yes. Click the Toll icon in the toolbar and flip the switch for that site (or that mode: for example, keep Shorts gated but let the YouTube homepage run free). Changes apply immediately on open tabs.
 
 **Where does the time-counter data live?**
 In your browser's local extension storage. Nothing leaves your machine. Removing the extension wipes it.
