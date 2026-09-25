@@ -30,29 +30,65 @@
 
   <main>
     <section class="hero" id="top">
+      <div class="hero-bg" aria-hidden="true"></div>
       <div class="hero-copy">
-        <p class="eyebrow">Doom-scroll gate</p>
-        <h1>Every reel <em>costs</em> you.<br/>Toll makes it literal.</h1>
-        <p class="lede">A quick math problem stands between you and the next Short, Reel, or feed refresh. Solve it and you pass. Get it wrong and you wait. Ninety seconds of intent, and you scroll on. Or you don't.</p>
+        <p class="eyebrow"><span class="pulse"></span> Doom-scroll gate · v0.2</p>
+        <h1>Every reel <em>costs</em> you.</h1>
+        <p class="tagline">Toll makes it literal.</p>
+        <p class="lede">A quick math problem stands between you and the next Short, Reel, or feed refresh. Solve it and you pass. Get it wrong and you wait.</p>
         <div class="cta-row">
-          <a class="btn primary lg" href="https://github.com/sohag-pro/Toll/releases/latest" target="_blank" rel="noopener">Add to browser</a>
-          <a class="btn ghost lg" href="#install">See how</a>
+          <a class="btn primary lg" href="https://github.com/sohag-pro/Toll/releases/latest" target="_blank" rel="noopener">
+            <span>Add to browser</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+          </a>
+          <a class="btn ghost lg" href="#install">See how it works</a>
+        </div>
+        <div class="proof-row">
+          <div class="proof"><span class="proof-num">3</span><span class="proof-lbl">problems<br/>per unlock</span></div>
+          <div class="proof-sep"></div>
+          <div class="proof"><span class="proof-num">5→60s</span><span class="proof-lbl">escalating<br/>lockout</span></div>
+          <div class="proof-sep"></div>
+          <div class="proof"><span class="proof-num">0</span><span class="proof-lbl">servers,<br/>accounts, tracking</span></div>
         </div>
         <p class="chips">
-          <span class="chip">YouTube Shorts</span>
-          <span class="chip">Facebook Reels</span>
-          <span class="chip">Instagram Reels</span>
-          <span class="chip">TikTok</span>
+          <span class="chip"><i class="dot yt"></i>YouTube Shorts</span>
+          <span class="chip"><i class="dot fb"></i>Facebook Reels</span>
+          <span class="chip"><i class="dot ig"></i>Instagram Reels</span>
+          <span class="chip"><i class="dot tt"></i>TikTok</span>
         </p>
       </div>
       <div class="hero-art" aria-hidden="true">
         <div class="phone">
-          <div class="reel"></div>
+          <div class="reel">
+            <div class="reel-topbar">
+              <span>For You</span>
+              <span class="live">● LIVE</span>
+            </div>
+            <div class="reel-silhouette">
+              <div class="ring"></div>
+              <div class="ring r2"></div>
+            </div>
+            <div class="reel-rail">
+              <span></span><span></span><span></span><span></span>
+            </div>
+            <div class="reel-caption">
+              <div class="cap-line" style="width:70%"></div>
+              <div class="cap-line" style="width:52%"></div>
+            </div>
+          </div>
+          <div class="time-pill" aria-hidden="true">
+            <span class="tp-dot"></span>
+            <span>Today · 42m</span>
+          </div>
           <div class="gate">
             <div class="gate-badge">TOLL · NEXT REEL</div>
-            <div class="gate-q">47 &times; 3 = ?</div>
-            <div class="gate-input"></div>
-            <div class="gate-actions"><span class="gate-btn primary">Submit</span><span class="gate-btn">Cancel</span></div>
+            <div class="gate-q">47 <span class="op">&times;</span> 3 <span class="op">=</span> ?</div>
+            <div class="gate-input"><span class="caret"></span></div>
+            <div class="gate-actions">
+              <span class="gate-btn primary">Submit</span>
+              <span class="gate-btn">Cancel</span>
+            </div>
+            <div class="gate-foot">Wrong = escalating lockout.</div>
           </div>
         </div>
       </div>
