@@ -498,7 +498,7 @@
 
   function readSettings(cb) {
     try {
-      chrome.storage.sync.get({ toll_settings: DEFAULT_SETTINGS }, (r) => {
+      chrome.storage.local.get({ toll_settings: DEFAULT_SETTINGS }, (r) => {
         const s = r && r.toll_settings ? r.toll_settings : DEFAULT_SETTINGS;
         cb(mergeSettings(DEFAULT_SETTINGS, s));
       });
@@ -518,9 +518,15 @@
   function onSettingsChange(cb) {
     try {
       chrome.storage.onChanged.addListener((changes, area) => {
-        if (area !== "sync" || !changes.toll_settings) return;
+        if (area !== "local" || !changes.toll_settings) return;
         const next = changes.toll_settings.newValue || DEFAULT_SETTINGS;
         cb(mergeSettings(DEFAULT_SETTINGS, next));
+      });
+    } catch (_) {}
+    try {
+      chrome.runtime.onMessage.addListener((msg) => {
+        if (!msg || msg.type !== "toll_settings") return;
+        cb(mergeSettings(DEFAULT_SETTINGS, msg.settings || {}));
       });
     } catch (_) {}
   }
@@ -532,14 +538,18 @@
     setMode(mode, opts) {
       opts = opts || {};
       state.scrollTarget = opts.scrollTarget || null;
-      // Reset cap when entering cap mode or leaving it.
-      if (mode === "cap") {
+      const nextMode = mode || "off";
+      if (nextMode === "cap") {
         state.capY = (opts.initialPages != null ? opts.initialPages : CAP_INITIAL_PAGES) * viewportH();
-        // If we entered mid-scroll, clamp back.
         if (scrollY() > state.capY) scrollTo(state.capY);
       }
-      state.mode = mode || "off";
-      if (state.mode === "off") closeGate();
+      state.mode = nextMode;
+      if (nextMode === "off") {
+        state.pendingDirection = null;
+        state.pendingAction = null;
+        state.advancing = false;
+        closeGate();
+      }
     },
     // Legacy reel toggle kept for existing platform scripts.
     setActive(v) {
