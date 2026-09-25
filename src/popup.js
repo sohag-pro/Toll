@@ -3,7 +3,51 @@ const DEFAULTS = {
   facebook: { reel: true, cap: true },
   instagram: { reel: true },
   tiktok: { reel: true },
+  tracker: { enabled: true, showEveryMin: 5, showDurationSec: 5 },
 };
+
+const PLATFORM_LABELS = {
+  youtube: "YouTube",
+  facebook: "Facebook",
+  instagram: "Instagram",
+  tiktok: "TikTok",
+};
+
+function todayKey() {
+  const d = new Date();
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${y}-${m}-${day}`;
+}
+
+function fmtDur(sec) {
+  sec = Math.max(0, Math.floor(sec));
+  const h = Math.floor(sec / 3600);
+  const m = Math.floor((sec % 3600) / 60);
+  const s = sec % 60;
+  if (h > 0) return `${h}h ${m}m`;
+  if (m > 0) return `${m}m`;
+  return `${s}s`;
+}
+
+function loadTimes() {
+  return new Promise((resolve) => {
+    chrome.storage.local.get({ toll_time: {} }, (r) => resolve(r.toll_time || {}));
+  });
+}
+
+async function renderTimes() {
+  const el = document.getElementById("time-today");
+  if (!el) return;
+  const all = await loadTimes();
+  const k = todayKey();
+  const lines = Object.keys(PLATFORM_LABELS).map((p) => {
+    const sec = Number((all[p] || {})[k]) || 0;
+    return `<div style="display:flex;justify-content:space-between;"><span>${PLATFORM_LABELS[p]}</span><span style="color:#e8ebf0;">${fmtDur(sec)}</span></div>`;
+  });
+  el.innerHTML = lines.join("");
+}
 
 const HOST_PATTERNS = [
   "*://*.youtube.com/*",
@@ -80,6 +124,7 @@ async function persist(settings) {
 async function init() {
   let settings = await load();
   paint(settings);
+  renderTimes();
 
   document.querySelectorAll("input[data-key]").forEach((input) => {
     input.addEventListener("change", async () => {

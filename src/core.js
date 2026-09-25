@@ -494,6 +494,7 @@
     facebook: { reel: true, cap: true },
     instagram: { reel: true },
     tiktok: { reel: true },
+    tracker: { enabled: true, showEveryMin: 5, showDurationSec: 5 },
   };
 
   function readSettings(cb) {
@@ -531,10 +532,172 @@
     } catch (_) {}
   }
 
+  // ---------- Time tracker ----------
+
+  function detectPlatform() {
+    const h = location.hostname;
+    if (/(^|\.)youtube\.com$/.test(h)) return "youtube";
+    if (/(^|\.)facebook\.com$/.test(h)) return "facebook";
+    if (/(^|\.)instagram\.com$/.test(h)) return "instagram";
+    if (/(^|\.)tiktok\.com$/.test(h)) return "tiktok";
+    return null;
+  }
+
+  function today() {
+    const d = new Date();
+    const y = d.getFullYear();
+    const m = String(d.getMonth() + 1).padStart(2, "0");
+    const day = String(d.getDate()).padStart(2, "0");
+    return `${y}-${m}-${day}`;
+  }
+
+  function fmtDuration(sec) {
+    sec = Math.max(0, Math.floor(sec));
+    const h = Math.floor(sec / 3600);
+    const m = Math.floor((sec % 3600) / 60);
+    const s = sec % 60;
+    if (h > 0) return `${h}h ${m}m`;
+    if (m > 0) return `${m}m`;
+    return `${s}s`;
+  }
+
+  const tracker = {
+    platform: null,
+    settings: DEFAULT_SETTINGS.tracker,
+    todaySec: 0,
+    todayKey: today(),
+    lastFlushAt: 0,
+    lastShowAt: 0,
+    tickInterval: null,
+    toastEl: null,
+    hideTimer: null,
+    started: false,
+  };
+
+  function loadTimeToday(platform, dateKey, cb) {
+    try {
+      chrome.storage.local.get({ toll_time: {} }, (r) => {
+        const all = (r && r.toll_time) || {};
+        const p = all[platform] || {};
+        cb(Number(p[dateKey]) || 0);
+      });
+    } catch (_) { cb(0); }
+  }
+
+  function flushTime() {
+    if (!tracker.platform) return;
+    try {
+      chrome.storage.local.get({ toll_time: {} }, (r) => {
+        const all = (r && r.toll_time) || {};
+        const p = all[tracker.platform] || {};
+        p[tracker.todayKey] = tracker.todaySec;
+        // Prune entries older than 30 days.
+        const cutoff = Date.now() - 30 * 86400 * 1000;
+        for (const k of Object.keys(p)) {
+          const t = new Date(k + "T00:00:00").getTime();
+          if (!isNaN(t) && t < cutoff) delete p[k];
+        }
+        all[tracker.platform] = p;
+        chrome.storage.local.set({ toll_time: all });
+      });
+    } catch (_) {}
+  }
+
+  function ensureToast() {
+    if (tracker.toastEl && document.body && document.body.contains(tracker.toastEl)) return tracker.toastEl;
+    if (!document.body) return null;
+    const el = document.createElement("div");
+    el.id = "toll-timer";
+    el.innerHTML = `<span class="dot"></span><span class="lbl">Today</span><span class="val">0s</span>`;
+    document.body.appendChild(el);
+    tracker.toastEl = el;
+    return el;
+  }
+
+  function showToast() {
+    const el = ensureToast();
+    if (!el) return;
+    const val = el.querySelector(".val");
+    if (val) val.textContent = fmtDuration(tracker.todaySec);
+    el.classList.add("show");
+    if (tracker.hideTimer) clearTimeout(tracker.hideTimer);
+    const durMs = Math.max(1000, (tracker.settings.showDurationSec || 5) * 1000);
+    tracker.hideTimer = setTimeout(() => {
+      if (tracker.toastEl) tracker.toastEl.classList.remove("show");
+    }, durMs);
+    tracker.lastShowAt = Date.now();
+  }
+
+  function isActive() {
+    return document.visibilityState === "visible" && document.hasFocus();
+  }
+
+  function tick() {
+    // Handle midnight rollover.
+    const k = today();
+    if (k !== tracker.todayKey) {
+      flushTime();
+      tracker.todayKey = k;
+      tracker.todaySec = 0;
+    }
+    if (!isActive()) return;
+    tracker.todaySec += 1;
+    // Flush every 15s of active time.
+    if (Date.now() - tracker.lastFlushAt > 15000) {
+      tracker.lastFlushAt = Date.now();
+      flushTime();
+    }
+    // Periodic reappearance.
+    const everyMs = Math.max(30000, (tracker.settings.showEveryMin || 5) * 60000);
+    if (Date.now() - tracker.lastShowAt > everyMs) showToast();
+  }
+
+  function startTracker() {
+    if (tracker.started) return;
+    const p = detectPlatform();
+    if (!p) return;
+    tracker.platform = p;
+    tracker.started = true;
+    loadTimeToday(p, tracker.todayKey, (sec) => {
+      tracker.todaySec = sec;
+      // Initial toast after DOM ready.
+      const initial = () => {
+        showToast();
+        // Hide sooner if idle at load.
+        setTimeout(() => { if (tracker.toastEl) tracker.toastEl.classList.remove("show"); },
+          Math.max(1500, (tracker.settings.showDurationSec || 5) * 1000));
+      };
+      if (document.body) initial();
+      else document.addEventListener("DOMContentLoaded", initial, { once: true });
+    });
+    tracker.tickInterval = setInterval(tick, 1000);
+    window.addEventListener("beforeunload", flushTime);
+    document.addEventListener("visibilitychange", () => { if (!isActive()) flushTime(); });
+  }
+
+  function stopTracker() {
+    if (!tracker.started) return;
+    if (tracker.tickInterval) clearInterval(tracker.tickInterval);
+    tracker.tickInterval = null;
+    if (tracker.toastEl && tracker.toastEl.parentNode) tracker.toastEl.parentNode.removeChild(tracker.toastEl);
+    tracker.toastEl = null;
+    tracker.started = false;
+  }
+
+  function applyTrackerSettings(s) {
+    tracker.settings = Object.assign({}, DEFAULT_SETTINGS.tracker, (s && s.tracker) || {});
+    if (tracker.settings.enabled) startTracker();
+    else stopTracker();
+  }
+
+  readSettings((s) => applyTrackerSettings(s));
+  onSettingsChange((s) => applyTrackerSettings(s));
+
   window.Toll = {
     DEFAULT_SETTINGS,
     readSettings,
     onSettingsChange,
+    showTimer: showToast,
     setMode(mode, opts) {
       opts = opts || {};
       state.scrollTarget = opts.scrollTarget || null;
