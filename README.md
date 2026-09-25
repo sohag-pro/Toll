@@ -167,6 +167,8 @@ Bug reports and site-detection fixes: open an issue with the URL and a note on w
 
 Maintainers can produce a release ZIP with `./scripts/build.sh`. The output lands in `dist/` and is what gets attached to GitHub releases. Pushing a `vX.Y.Z` tag triggers `.github/workflows/release.yml`, which builds the ZIP and publishes a release automatically. The tag version must match `version` in `manifest.json`.
 
+**Landing page.** The public site lives in `site/` and auto-deploys to GitHub Pages via `.github/workflows/pages.yml` on every push to `main` that touches `site/`. To enable it once per repo: Settings → Pages → Source = **GitHub Actions**. Local preview: `python3 -m http.server -d site 8000` and open `http://localhost:8000`.
+
 ## License
 
 MIT. See [LICENSE](LICENSE). If it helps you scroll less, that is the point.

@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="Toll — pay math to keep scrolling">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b0d12"/>
+      <stop offset="1" stop-color="#151a26"/>
+    </linearGradient>
+    <linearGradient id="grad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#4c8dff"/>
+      <stop offset="1" stop-color="#8a5cff"/>
+    </linearGradient>
+    <radialGradient id="glow1" cx="0.15" cy="0.3" r="0.6">
+      <stop offset="0" stop-color="#4c8dff" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#4c8dff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow2" cx="0.9" cy="0.85" r="0.55">
+      <stop offset="0" stop-color="#8a5cff" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#8a5cff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow1)"/>
+  <rect width="1200" height="630" fill="url(#glow2)"/>
+
+  <!-- Logo -->
+  <g transform="translate(80,80)">
+    <rect width="88" height="88" rx="20" fill="#12141a" stroke="#232836"/>
+    <g transform="translate(44,44)">
+      <circle cx="-16" cy="0" r="14" fill="none" stroke="url(#grad)" stroke-width="6" stroke-linecap="round"/>
+      <circle cx="16" cy="0" r="14" fill="none" stroke="url(#grad)" stroke-width="6" stroke-linecap="round"/>
+      <circle cx="0" cy="0" r="10" fill="#12141a"/>
+      <path d="M0 -6 L0 6 M-6 0 L6 0" stroke="#e8ebf0" stroke-width="3" stroke-linecap="round"/>
+    </g>
+  </g>
+
+  <text x="188" y="140" fill="#e8ebf0" font-family="-apple-system, BlinkMacSystemFont, 'Inter', sans-serif" font-weight="700" font-size="46" letter-spacing="0.5">Toll</text>
+
+  <!-- Headline -->
+  <text x="80" y="330" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Inter', sans-serif" font-weight="700" font-size="86" letter-spacing="-1.5">Every reel</text>
+  <text x="80" y="430" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Inter', sans-serif" font-weight="700" font-size="86" letter-spacing="-1.5">
+    <tspan>costs</tspan>
+    <tspan fill="url(#grad)"> you.</tspan>
+  </text>
+
+  <!-- Sub -->
+  <text x="80" y="500" fill="#9aa3b2" font-family="-apple-system, BlinkMacSystemFont, 'Inter', sans-serif" font-weight="400" font-size="26">Solve a quick math problem before the next Short, Reel, or feed refresh.</text>
+
+  <!-- Chips -->
+  <g font-family="-apple-system, BlinkMacSystemFont, 'Inter', sans-serif" font-size="20" fill="#cfd4de">
+    <g transform="translate(80,540)">
+      <rect width="180" height="42" rx="21" fill="#171a22" stroke="#232836"/>
+      <text x="90" y="27" text-anchor="middle">YouTube Shorts</text>
+    </g>
+    <g transform="translate(272,540)">
+      <rect width="170" height="42" rx="21" fill="#171a22" stroke="#232836"/>
+      <text x="85" y="27" text-anchor="middle">Facebook Reels</text>
+    </g>
+    <g transform="translate(454,540)">
+      <rect width="180" height="42" rx="21" fill="#171a22" stroke="#232836"/>
+      <text x="90" y="27" text-anchor="middle">Instagram Reels</text>
+    </g>
+    <g transform="translate(646,540)">
+      <rect width="110" height="42" rx="21" fill="#171a22" stroke="#232836"/>
+      <text x="55" y="27" text-anchor="middle">TikTok</text>
+    </g>
+  </g>
+
+  <!-- Right-side gate card -->
+  <g transform="translate(780,180)">
+    <rect width="340" height="290" rx="18" fill="#12141a" stroke="#262a35"/>
+    <g transform="translate(24,28)">
+      <rect width="140" height="30" rx="15" fill="#1b1f28"/>
+      <text x="70" y="20" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Inter', sans-serif" font-size="13" fill="#9aa3b2" letter-spacing="2">TOLL · NEXT REEL</text>
+    </g>
+    <text x="24" y="130" font-family="-apple-system, BlinkMacSystemFont, 'Inter', sans-serif" font-weight="700" font-size="52" fill="#ffffff">47 × 3 = ?</text>
+    <rect x="24" y="160" width="292" height="50" rx="10" fill="#0d1016" stroke="#2a2f3c"/>
+    <g transform="translate(24,230)">
+      <rect width="140" height="40" rx="10" fill="url(#grad)"/>
+      <text x="70" y="26" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Inter', sans-serif" font-weight="700" font-size="15" fill="#0b0d12">Submit</text>
+      <rect x="150" y="0" width="140" height="40" rx="10" fill="#1b1f28" stroke="#2a2f3c"/>
+      <text x="220" y="26" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Inter', sans-serif" font-weight="600" font-size="15" fill="#e8ebf0">Cancel</text>
+    </g>
+  </g>
+</svg>

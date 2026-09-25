@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Toll — pay math to keep scrolling</title>
+<meta name="description" content="A tiny browser extension that puts a math problem between you and the next reel, short, or feed refresh. Break the doom-scroll reflex." />
+<meta property="og:title" content="Toll — pay math to keep scrolling" />
+<meta property="og:description" content="Solve a quick problem to advance the next Short, Reel, or refresh your feed. Local-only, no accounts." />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="./assets/og.svg" />
+<meta name="theme-color" content="#12141a" />
+<link rel="icon" href="./assets/logo.svg" type="image/svg+xml" />
+<link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <header class="nav">
+    <a class="brand" href="#top">
+      <img src="./assets/logo.svg" alt="Toll" width="32" height="32" />
+      <span>Toll</span>
+    </a>
+    <nav>
+      <a href="#features">Features</a>
+      <a href="#install">Install</a>
+      <a href="#faq">FAQ</a>
+      <a class="btn ghost" href="https://github.com/sohag-pro/Toll" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn primary" id="cta-download" href="https://github.com/sohag-pro/Toll/releases/latest" target="_blank" rel="noopener">Download</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="top">
+      <div class="hero-copy">
+        <p class="eyebrow">Doom-scroll gate</p>
+        <h1>Every reel <em>costs</em> you.<br/>Toll makes it literal.</h1>
+        <p class="lede">A quick math problem stands between you and the next Short, Reel, or feed refresh. Solve it and you pass. Get it wrong and you wait. Ninety seconds of intent, and you scroll on. Or you don't.</p>
+        <div class="cta-row">
+          <a class="btn primary lg" href="https://github.com/sohag-pro/Toll/releases/latest" target="_blank" rel="noopener">Add to browser</a>
+          <a class="btn ghost lg" href="#install">See how</a>
+        </div>
+        <p class="chips">
+          <span class="chip">YouTube Shorts</span>
+          <span class="chip">Facebook Reels</span>
+          <span class="chip">Instagram Reels</span>
+          <span class="chip">TikTok</span>
+        </p>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="phone">
+          <div class="reel"></div>
+          <div class="gate">
+            <div class="gate-badge">TOLL · NEXT REEL</div>
+            <div class="gate-q">47 &times; 3 = ?</div>
+            <div class="gate-input"></div>
+            <div class="gate-actions"><span class="gate-btn primary">Submit</span><span class="gate-btn">Cancel</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="features" id="features">
+      <h2>What Toll does</h2>
+      <div class="grid">
+        <article class="card">
+          <div class="ico">R</div>
+          <h3>Reel gate</h3>
+          <p>Scrolls, swipes, arrow keys, and the on-screen next/previous buttons are all intercepted on Shorts, Reels, and TikTok. Video pauses while you solve.</p>
+        </article>
+        <article class="card">
+          <div class="ico">F</div>
+          <h3>Feed cap</h3>
+          <p>YouTube's homepage and Facebook's news feed stop after two screens. Each unlock loads one more. Infinite scroll becomes finite.</p>
+        </article>
+        <article class="card">
+          <div class="ico">L</div>
+          <h3>Escalating lockout</h3>
+          <p>Wrong answers cost more each time: 5s, 15s, 30s, 60s. Button-mashing gets punished. One right answer resets the streak.</p>
+        </article>
+        <article class="card">
+          <div class="ico">P</div>
+          <h3>Control panel</h3>
+          <p>Per-platform, per-mode toggles in the toolbar popup. Keep Shorts gated but let the homepage run free. Changes apply live.</p>
+        </article>
+        <article class="card">
+          <div class="ico">T</div>
+          <h3>Time counter</h3>
+          <p>A small pill in the top-right shows today's time on the site. Reappears every few minutes of active use. Daily totals in the popup.</p>
+        </article>
+        <article class="card">
+          <div class="ico">·</div>
+          <h3>Local-only</h3>
+          <p>Nothing leaves your machine. No servers, no accounts, no telemetry. Two permissions: <code>storage</code> and the four supported hosts.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="shots">
+      <h2>Here's how it looks</h2>
+      <div class="shot-row">
+        <figure>
+          <img src="https://raw.githubusercontent.com/sohag-pro/Toll/main/docs/screenshots/youtube-shorts.png" alt="YouTube Shorts with math gate" loading="lazy" />
+          <figcaption>YouTube Shorts — swipe blocked, video paused, math gate up.</figcaption>
+        </figure>
+        <figure>
+          <img src="https://raw.githubusercontent.com/sohag-pro/Toll/main/docs/screenshots/facebook-reel.png" alt="Facebook Reels with math gate" loading="lazy" />
+          <figcaption>Facebook Reels — next/prev buttons intercepted too.</figcaption>
+        </figure>
+        <figure>
+          <img src="https://raw.githubusercontent.com/sohag-pro/Toll/main/docs/screenshots/facebook-timeline.png" alt="Facebook timeline capped by Toll" loading="lazy" />
+          <figcaption>Facebook feed capped after two screens. Solve to load more.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="install" id="install">
+      <h2>Install in about two minutes</h2>
+      <p class="lede">Works in any Chromium browser — Chrome, Brave, Edge, Arc, Opera. No account, no build tools.</p>
+      <ol class="steps">
+        <li>
+          <span class="num">1</span>
+          <div>
+            <h3>Download the latest ZIP</h3>
+            <p>Grab <code>toll-vX.Y.Z.zip</code> from the <a href="https://github.com/sohag-pro/Toll/releases/latest" target="_blank" rel="noopener">latest release</a>. Unzip it. You should see a folder with <code>manifest.json</code> inside.</p>
+          </div>
+        </li>
+        <li>
+          <span class="num">2</span>
+          <div>
+            <h3>Open your browser's extensions page</h3>
+            <p><code>chrome://extensions</code>, <code>brave://extensions</code>, <code>edge://extensions</code>, or <code>arc://extensions</code>.</p>
+          </div>
+        </li>
+        <li>
+          <span class="num">3</span>
+          <div>
+            <h3>Turn on Developer mode</h3>
+            <p>Toggle in the top-right of the extensions page. A row of buttons appears.</p>
+          </div>
+        </li>
+        <li>
+          <span class="num">4</span>
+          <div>
+            <h3>Load unpacked</h3>
+            <p>Click <strong>Load unpacked</strong>. Pick the unzipped folder (the one with <code>manifest.json</code>). Toll is armed.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section class="faq" id="faq">
+      <h2>Questions</h2>
+      <details open>
+        <summary>Does it send any data anywhere?</summary>
+        <p>No. Everything runs in your browser. Toggle state and daily time counts live in <code>chrome.storage.local</code>. Uninstall wipes them.</p>
+      </details>
+      <details>
+        <summary>Why math and not a delay timer?</summary>
+        <p>A timer doesn't stop the reflex. You wait it out. Solving something forces a different mode for a few seconds. That's the whole trick.</p>
+      </details>
+      <details>
+        <summary>Can I disable it on one site but not another?</summary>
+        <p>Yes. The toolbar popup has per-platform toggles — even per-mode (Shorts vs. YouTube home cap, for example). Changes apply live.</p>
+      </details>
+      <details>
+        <summary>Safari or Firefox?</summary>
+        <p>Not yet. Chromium only for now.</p>
+      </details>
+      <details>
+        <summary>A site changed and it stopped working.</summary>
+        <p>Reel and feed layouts shift often. <a href="https://github.com/sohag-pro/Toll/issues/new" target="_blank" rel="noopener">Open an issue</a> with the URL and what broke.</p>
+      </details>
+    </section>
+
+    <section class="tail">
+      <h2>Break the reflex.</h2>
+      <p>Ninety seconds of intent between you and the next reel.</p>
+      <a class="btn primary lg" href="https://github.com/sohag-pro/Toll/releases/latest" target="_blank" rel="noopener">Download Toll</a>
+    </section>
+  </main>
+
+  <footer>
+    <p>MIT licensed. Built by <a href="https://github.com/sohag-pro" target="_blank" rel="noopener">@sohag-pro</a>. <a href="https://github.com/sohag-pro/Toll" target="_blank" rel="noopener">Source on GitHub</a>.</p>
+  </footer>
+</body>
+</html>
