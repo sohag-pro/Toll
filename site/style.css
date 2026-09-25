@@ -357,6 +357,64 @@ section h2 {
 .card h3 { margin: 0 0 6px; font-size: 16px; }
 .card p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.55; }
 
+/* Trust / open-source section */
+.trust {
+  padding: 60px 0 40px;
+}
+.trust-inner {
+  position: relative;
+  border-radius: 20px;
+  padding: 44px clamp(24px, 4vw, 48px);
+  background:
+    radial-gradient(600px 300px at 15% 15%, rgba(76,141,255,0.14), transparent 60%),
+    radial-gradient(500px 260px at 85% 85%, rgba(138,92,255,0.14), transparent 60%),
+    linear-gradient(180deg, rgba(23,26,34,0.55), rgba(23,26,34,0.25));
+  border: 1px solid var(--line);
+  display: grid; grid-template-columns: 1fr 1fr; gap: 44px; align-items: center;
+  overflow: hidden;
+}
+.trust-inner::before {
+  content: ""; position: absolute; inset: 0;
+  background:
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0 1px, transparent 1px 80px),
+    repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0 1px, transparent 1px 80px);
+  pointer-events: none; opacity: 0.6;
+}
+.trust-copy { position: relative; }
+.trust-copy h2 {
+  font-size: clamp(28px, 3.6vw, 40px); line-height: 1.05;
+  letter-spacing: -0.02em; margin: 0 0 18px;
+}
+.trust-copy .lede { max-width: 46ch; margin: 0 0 24px; font-size: 15.5px; }
+.trust-copy .cta-row .btn.primary { display: inline-flex; align-items: center; gap: 8px; }
+
+.trust-grid {
+  position: relative;
+  display: grid; grid-template-columns: 1fr; gap: 12px;
+}
+.trust-card {
+  padding: 18px 20px; border-radius: 12px;
+  background: rgba(11,13,18,0.55);
+  border: 1px solid var(--line);
+  transition: transform .3s cubic-bezier(.2,.7,.2,1), border-color .25s ease, background .25s ease;
+}
+.trust-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(138,92,255,0.35);
+  background: rgba(11,13,18,0.75);
+}
+.tc-ico {
+  width: 36px; height: 36px; border-radius: 10px;
+  display: grid; place-items: center; margin-bottom: 12px;
+  background: linear-gradient(135deg, rgba(76,141,255,0.18), rgba(138,92,255,0.18));
+  border: 1px solid rgba(138,92,255,0.35);
+  color: #cfd7ff;
+}
+.trust-card h3 { margin: 0 0 6px; font-size: 15px; }
+.trust-card p { margin: 0; color: var(--muted); font-size: 13.5px; line-height: 1.55; }
+.trust-card a { color: #cfd7ff; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+.trust-card a:hover { color: #fff; }
+
 .shots { padding: 40px 0; }
 .section-head { margin-bottom: 22px; }
 .section-head h2 { margin-bottom: 4px; }
@@ -509,6 +567,7 @@ footer a { color: var(--muted); }
   .stats { grid-template-columns: 1fr 1fr; max-width: 100%; }
   .stats .stat:last-child { grid-column: 1 / -1; }
   .grid, .shot-row { grid-template-columns: 1fr; }
+  .trust-inner { grid-template-columns: 1fr; gap: 28px; padding: 28px 20px; }
   .nav nav a:not(.btn) { display: none; }
   .lightbox { padding: 16px; }
   .lb-close { top: 12px; right: 12px; }

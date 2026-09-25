@@ -28,10 +28,9 @@
       card.style.setProperty("--mx", mx + "%");
       card.style.setProperty("--my", my + "%");
     });
-    card.addEventListener("mouseleave", () => {
-      card.style.removeProperty("--mx");
-      card.style.removeProperty("--my");
-    });
+    // Do NOT reset --mx/--my on mouseleave; the CSS opacity fade would
+    // otherwise snap the glow back to the default position (50% 0%)
+    // mid-fade. Keeping the last coords lets it fade in place.
   });
 })();
 
