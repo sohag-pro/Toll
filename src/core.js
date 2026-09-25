@@ -16,6 +16,7 @@
     wrongStreak: 0,
     lockedUntil: 0,
     lastScrollAt: 0,
+    advancing: false,
     pendingDirection: null,
     pendingAction: null, // 'advance' | 'extend'
     onAdvance: null,
@@ -269,6 +270,37 @@
     }
   }
 
+  function reelNavFromEvent(e) {
+    const path = (e.composedPath && e.composedPath()) || [];
+    const nodes = path.length ? path : [e.target];
+    for (const n of nodes) {
+      if (!n || n.nodeType !== 1) continue;
+      const el = n;
+      if (el.closest && el.closest("#toll-root")) return null;
+      const id = (el.id || "").toLowerCase();
+      if (id === "navigation-button-down") return "next";
+      if (id === "navigation-button-up") return "prev";
+      const label = (el.getAttribute && (el.getAttribute("aria-label") || "")) || "";
+      const l = label.toLowerCase();
+      if (l && (/(next|forward|down)/.test(l) || /(prev|previous|back|up)/.test(l))) {
+        if (/(prev|previous|back|up)/.test(l)) return "prev";
+        return "next";
+      }
+    }
+    return null;
+  }
+
+  function onClick(e) {
+    if (state.mode !== "reel") return;
+    if (state.advancing) return;
+    const t = e.target;
+    if (t && t.closest && t.closest("#toll-root")) return;
+    const dir = reelNavFromEvent(e);
+    if (!dir) return;
+    stopEvent(e);
+    throttleTrigger(dir, "advance");
+  }
+
   function onScroll() {
     if (state.mode !== "cap") return;
     if (scrollY() > state.capY) {
@@ -278,6 +310,7 @@
   }
 
   function throttleTrigger(dir, action) {
+    if (state.advancing) return;
     const t = Date.now();
     if (t - state.lastScrollAt < SCROLL_COOLDOWN_MS) return;
     state.lastScrollAt = t;
@@ -407,7 +440,9 @@
                 extendCap();
               } else {
                 const fn = state.onAdvance || defaultAdvance;
+                state.advancing = true;
                 try { fn(dir); } catch (_) { defaultAdvance(dir); }
+                setTimeout(() => { state.advancing = false; }, 400);
               }
             }, 60);
           } else {
@@ -443,6 +478,11 @@
     window.addEventListener("touchmove", onTouchMove, { capture: true, passive: false });
     window.addEventListener("touchend", onTouchEnd, { capture: true, passive: true });
     window.addEventListener("scroll", onScroll, { capture: true, passive: true });
+    window.addEventListener("click", onClick, { capture: true });
+    window.addEventListener("pointerup", onClick, { capture: true });
+    window.addEventListener("pointerdown", onClick, { capture: true });
+    window.addEventListener("mousedown", onClick, { capture: true });
+    window.addEventListener("mouseup", onClick, { capture: true });
   }
 
   attachListeners();
