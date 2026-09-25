@@ -546,19 +546,176 @@ section h2 {
 }
 
 .install { padding: 40px 0; }
+
+/* Browser picker */
+.browser-picker {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  padding: 6px; margin-bottom: 20px;
+  background: rgba(23,26,34,0.35); border: 1px solid var(--line);
+  border-radius: 14px;
+}
+.bp-tab {
+  flex: 1; min-width: 100px;
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 10px 14px; border-radius: 10px;
+  background: transparent; border: 1px solid transparent; color: var(--muted);
+  font: 500 13.5px/1 -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+  cursor: pointer; transition: background .2s ease, color .2s ease, border-color .2s ease;
+}
+.bp-tab:hover { color: var(--text); background: rgba(255,255,255,0.03); }
+.bp-tab.active {
+  background: linear-gradient(180deg, rgba(76,141,255,0.14), rgba(138,92,255,0.10));
+  color: #fff;
+  border-color: rgba(138,92,255,0.35);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03);
+}
+.bp-logo {
+  width: 16px; height: 16px; border-radius: 50%;
+  display: inline-block; box-shadow: inset 0 0 0 2px rgba(0,0,0,0.35);
+}
+
+/* Download CTA */
+.install-cta {
+  display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+  padding: 16px 18px; margin-bottom: 22px;
+  background: linear-gradient(180deg, rgba(76,141,255,0.08), rgba(138,92,255,0.05));
+  border: 1px solid rgba(138,92,255,0.25); border-radius: 14px;
+}
+.install-cta .btn.primary { display: inline-flex; align-items: center; gap: 8px; }
+.dl-note { margin: 0; font-size: 12.5px; color: var(--dim); }
+
+/* Steps */
 .steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
 .steps li {
-  display: grid; grid-template-columns: 48px 1fr; gap: 16px; align-items: start;
+  display: grid; grid-template-columns: 28px 40px 1fr; gap: 14px; align-items: start;
   padding: 18px 20px; border: 1px solid var(--line); border-radius: 14px;
   background: rgba(23,26,34,0.35);
+  transition: border-color .25s ease, background .25s ease;
 }
-.steps .num {
+.steps li.done { border-color: rgba(93,176,122,0.4); background: rgba(23,26,34,0.55); }
+.steps li.done .step-num { background: rgba(93,176,122,0.18); color: #5db07a; }
+.steps li.done .step-body h3 { color: var(--muted); }
+
+.step-check { position: relative; cursor: pointer; padding-top: 6px; }
+.step-check input {
+  position: absolute; opacity: 0; width: 24px; height: 24px; cursor: pointer;
+}
+.cbx {
+  display: grid; place-items: center;
+  width: 24px; height: 24px; border-radius: 8px;
+  background: #0d1016; border: 1.5px solid #2a2f3c;
+  color: #0b0d12; transition: background .2s ease, border-color .2s ease;
+}
+.cbx svg { opacity: 0; transition: opacity .15s ease; }
+.step-check input:checked + .cbx {
+  background: linear-gradient(135deg, var(--accent-a), var(--accent-b));
+  border-color: transparent;
+}
+.step-check input:checked + .cbx svg { opacity: 1; }
+.step-check input:focus-visible + .cbx {
+  outline: 2px solid rgba(76,141,255,0.6); outline-offset: 2px;
+}
+
+.step-num {
   width: 36px; height: 36px; border-radius: 10px;
   background: linear-gradient(135deg, var(--accent-a), var(--accent-b)); color: #0b0d12;
   font-weight: 700; display: grid; place-items: center;
+  transition: background .25s ease, color .25s ease;
 }
-.steps h3 { margin: 0 0 4px; font-size: 15px; }
-.steps p { margin: 0; color: var(--muted); font-size: 14px; }
+.step-body h3 { margin: 0 0 6px; font-size: 15px; color: var(--text); transition: color .2s ease; }
+.step-body p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.55; }
+
+/* Copy URL widget */
+.copy-url {
+  display: flex; align-items: stretch; gap: 0;
+  margin-top: 10px; border: 1px solid #2a2f3c; border-radius: 10px;
+  background: #0d1016; overflow: hidden;
+}
+.copy-url .url-target {
+  flex: 1; padding: 10px 12px; background: transparent; border: none; border-radius: 0;
+  color: #cfd7ff; font-family: "SF Mono", ui-monospace, Menlo, monospace; font-size: 13px;
+  align-self: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.copy-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 12px; border: none; border-left: 1px solid #2a2f3c;
+  background: #171a22; color: var(--text);
+  font: 600 12px/1 -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+  cursor: pointer; transition: background .2s ease, color .2s ease;
+}
+.copy-btn:hover { background: #1f2532; }
+.copy-btn .ic-check { display: none; color: #5db07a; }
+.copy-btn.copied .ic-copy { display: none; }
+.copy-btn.copied .ic-check { display: block; }
+.copy-btn.copied { color: #5db07a; }
+
+/* Mini mock for step 3 */
+.mini-mock {
+  display: inline-flex; align-items: center; gap: 10px;
+  margin-top: 12px; padding: 8px 12px;
+  background: #0d1016; border: 1px solid #2a2f3c; border-radius: 10px;
+  font-size: 12.5px; color: var(--muted);
+}
+.mm-switch {
+  position: relative; width: 34px; height: 20px; border-radius: 999px;
+  background: linear-gradient(135deg, var(--accent-a), var(--accent-b));
+}
+.mm-thumb {
+  position: absolute; top: 3px; left: 17px;
+  width: 14px; height: 14px; background: #fff; border-radius: 50%;
+  transition: left .3s ease;
+  animation: mmToggle 3s ease-in-out infinite;
+}
+@keyframes mmToggle {
+  0%, 100% { left: 17px; }
+  50% { left: 3px; }
+}
+
+/* Progress */
+.install-progress {
+  display: flex; align-items: center; gap: 14px; margin-top: 20px;
+  padding: 14px 18px; background: rgba(23,26,34,0.35);
+  border: 1px solid var(--line); border-radius: 12px;
+}
+.progress-track {
+  flex: 1; height: 6px; border-radius: 999px; background: #1b1f28; overflow: hidden;
+}
+.progress-fill {
+  height: 100%; width: 0%;
+  background: linear-gradient(90deg, var(--accent-a), var(--accent-b));
+  transition: width .35s ease;
+}
+.progress-text {
+  font-size: 12.5px; color: var(--muted); font-variant-numeric: tabular-nums;
+  min-width: 78px; text-align: right;
+}
+.reset-progress {
+  background: none; color: var(--dim); border: 1px solid var(--line);
+  border-radius: 8px; padding: 5px 10px; font-size: 12px; cursor: pointer;
+  transition: color .2s ease, border-color .2s ease;
+}
+.reset-progress:hover { color: var(--text); border-color: rgba(138,92,255,0.4); }
+
+/* Done banner */
+.install-done {
+  display: flex; align-items: flex-start; gap: 14px;
+  margin-top: 16px; padding: 16px 18px;
+  background: linear-gradient(180deg, rgba(93,176,122,0.10), rgba(93,176,122,0.04));
+  border: 1px solid rgba(93,176,122,0.35); border-radius: 14px;
+  animation: doneRise .4s ease-out;
+}
+.install-done[hidden] { display: none; }
+.install-done .done-badge {
+  width: 36px; height: 36px; border-radius: 10px;
+  background: rgba(93,176,122,0.18); color: #5db07a;
+  display: grid; place-items: center; flex-shrink: 0;
+}
+.install-done strong { color: var(--text); font-size: 15px; display: block; margin-bottom: 4px; }
+.install-done p { margin: 0; color: var(--muted); font-size: 13.5px; line-height: 1.5; }
+@keyframes doneRise {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
 .faq { padding: 40px 0; }
 .faq details {
@@ -648,9 +805,18 @@ footer a { color: var(--muted); }
   .trust-inner { padding: 24px 16px; border-radius: 14px; }
   .trust-copy h2 { font-size: clamp(24px, 6vw, 32px); }
 
-  .steps li { padding: 14px 16px; gap: 12px; grid-template-columns: 32px 1fr; }
-  .steps .num { width: 30px; height: 30px; border-radius: 8px; font-size: 13px; }
-  .steps h3 { font-size: 14px; }
+  .browser-picker { padding: 4px; gap: 4px; }
+  .bp-tab { min-width: 68px; padding: 8px 10px; font-size: 12px; gap: 6px; }
+  .bp-logo { width: 14px; height: 14px; }
+  .install-cta { padding: 14px; gap: 10px; }
+  .steps li { padding: 14px 14px; gap: 10px; grid-template-columns: 24px 32px 1fr; }
+  .step-check { padding-top: 4px; }
+  .cbx { width: 20px; height: 20px; border-radius: 6px; }
+  .step-num { width: 32px; height: 32px; border-radius: 8px; font-size: 14px; }
+  .step-body h3 { font-size: 14px; }
+  .copy-url .url-target { padding: 9px 10px; font-size: 12px; }
+  .install-progress { padding: 12px 14px; gap: 10px; flex-wrap: wrap; }
+  .progress-text { min-width: auto; }
 
   .faq details { padding: 12px 14px; }
   .faq summary { font-size: 14px; }

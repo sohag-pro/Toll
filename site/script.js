@@ -103,6 +103,134 @@
   });
 })();
 
+// Install section: browser picker, copy, progress checklist
+(() => {
+  const section = document.getElementById("install");
+  if (!section) return;
+
+  const BROWSERS = {
+    chrome: { name: "Chrome", url: "chrome://extensions" },
+    brave:  { name: "Brave",  url: "brave://extensions" },
+    edge:   { name: "Edge",   url: "edge://extensions" },
+    arc:    { name: "Arc",    url: "arc://extensions" },
+    opera:  { name: "Opera",  url: "opera://extensions" },
+  };
+
+  const STORAGE_KEY = "toll_install_progress";
+  const BROWSER_KEY = "toll_install_browser";
+
+  function setBrowser(key) {
+    const b = BROWSERS[key] || BROWSERS.chrome;
+    section.querySelectorAll(".bp-tab").forEach((t) => {
+      const active = t.dataset.browser === key;
+      t.classList.toggle("active", active);
+      t.setAttribute("aria-selected", active ? "true" : "false");
+    });
+    section.querySelectorAll("[data-browser-text]").forEach((el) => {
+      el.textContent = b.name;
+    });
+    section.querySelectorAll("[data-browser-url]").forEach((el) => {
+      el.textContent = b.url;
+    });
+    section.querySelectorAll("[data-copy-target]").forEach((btn) => {
+      btn.dataset.copyValue = b.url;
+      btn.classList.remove("copied");
+      const label = btn.querySelector(".copy-label");
+      if (label) label.textContent = "Copy";
+    });
+    try { localStorage.setItem(BROWSER_KEY, key); } catch (_) {}
+  }
+
+  section.querySelectorAll(".bp-tab").forEach((t) => {
+    t.addEventListener("click", () => setBrowser(t.dataset.browser));
+  });
+
+  let initial = "chrome";
+  try {
+    const saved = localStorage.getItem(BROWSER_KEY);
+    if (saved && BROWSERS[saved]) initial = saved;
+  } catch (_) {}
+  setBrowser(initial);
+
+  // Copy button
+  section.querySelectorAll("[data-copy-target]").forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      const value = btn.dataset.copyValue || "";
+      try {
+        await navigator.clipboard.writeText(value);
+      } catch (_) {
+        const ta = document.createElement("textarea");
+        ta.value = value;
+        ta.style.position = "fixed"; ta.style.opacity = "0";
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand("copy"); } catch (_) {}
+        document.body.removeChild(ta);
+      }
+      btn.classList.add("copied");
+      const label = btn.querySelector(".copy-label");
+      if (label) label.textContent = "Copied";
+      clearTimeout(btn._copyT);
+      btn._copyT = setTimeout(() => {
+        btn.classList.remove("copied");
+        if (label) label.textContent = "Copy";
+      }, 1600);
+    });
+  });
+
+  // Progress checklist
+  const checks = Array.from(section.querySelectorAll("input[data-progress-key]"));
+  const fill = document.getElementById("progress-fill");
+  const text = document.getElementById("progress-text");
+  const doneEl = document.getElementById("install-done");
+  const resetBtn = document.getElementById("reset-progress");
+
+  function load() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      return raw ? JSON.parse(raw) : {};
+    } catch (_) { return {}; }
+  }
+  function save(state) {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (_) {}
+  }
+
+  function paint(state) {
+    let done = 0;
+    checks.forEach((c) => {
+      const on = !!state[c.dataset.progressKey];
+      c.checked = on;
+      const li = c.closest("li");
+      if (li) li.classList.toggle("done", on);
+      if (on) done++;
+    });
+    const total = checks.length;
+    const pct = total ? Math.round((done / total) * 100) : 0;
+    if (fill) fill.style.width = pct + "%";
+    if (text) text.textContent = `${done} of ${total} done`;
+    if (doneEl) doneEl.hidden = done < total;
+  }
+
+  let state = load();
+  paint(state);
+
+  checks.forEach((c) => {
+    c.addEventListener("change", () => {
+      state[c.dataset.progressKey] = c.checked;
+      save(state);
+      paint(state);
+    });
+  });
+
+  if (resetBtn) {
+    resetBtn.addEventListener("click", () => {
+      state = {};
+      save(state);
+      paint(state);
+    });
+  }
+})();
+
 // Subtle parallax on hero laptop
 (() => {
   const target = document.querySelector(".laptop");

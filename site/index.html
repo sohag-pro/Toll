@@ -216,38 +216,119 @@
     </div>
 
     <section class="install reveal" id="install">
-      <h2>Install in about two minutes</h2>
-      <p class="lede">Works in any Chromium browser: Chrome, Brave, Edge, Arc, Opera. No account, no build tools.</p>
-      <ol class="steps">
-        <li>
-          <span class="num">1</span>
-          <div>
-            <h3>Download the latest ZIP</h3>
-            <p>Grab <code>toll-vX.Y.Z.zip</code> from the <a href="https://github.com/sohag-pro/Toll/releases/latest" target="_blank" rel="noopener">latest release</a>. Unzip it. You should see a folder with <code>manifest.json</code> inside.</p>
+      <div class="section-head">
+        <h2>Install in about two minutes</h2>
+        <p class="section-sub">Pick your browser, follow four steps. No coding, no account, nothing to sign up for.</p>
+      </div>
+
+      <div class="browser-picker" role="tablist" aria-label="Choose your browser">
+        <button class="bp-tab active" data-browser="chrome" role="tab" aria-selected="true">
+          <span class="bp-logo" style="background:linear-gradient(135deg,#4285f4,#34a853 40%,#fbbc05 70%,#ea4335);"></span>
+          Chrome
+        </button>
+        <button class="bp-tab" data-browser="brave" role="tab" aria-selected="false">
+          <span class="bp-logo" style="background:linear-gradient(135deg,#fb542b,#ff8000);"></span>
+          Brave
+        </button>
+        <button class="bp-tab" data-browser="edge" role="tab" aria-selected="false">
+          <span class="bp-logo" style="background:linear-gradient(135deg,#0078d4,#50e6ff);"></span>
+          Edge
+        </button>
+        <button class="bp-tab" data-browser="arc" role="tab" aria-selected="false">
+          <span class="bp-logo" style="background:linear-gradient(135deg,#ff6b6b,#ffa5a5);"></span>
+          Arc
+        </button>
+        <button class="bp-tab" data-browser="opera" role="tab" aria-selected="false">
+          <span class="bp-logo" style="background:linear-gradient(135deg,#ff1b2d,#ff5f6d);"></span>
+          Opera
+        </button>
+      </div>
+
+      <div class="install-cta">
+        <a class="btn primary lg" id="dl-btn" href="https://github.com/sohag-pro/Toll/releases/latest" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v14M5 12l7 7 7-7M5 21h14"/></svg>
+          <span>Download toll-<span data-browser-text>Chrome</span>.zip</span>
+        </a>
+        <p class="dl-note">Same ZIP for every Chromium browser. About 40 KB.</p>
+      </div>
+
+      <ol class="steps interactive">
+        <li data-step="1">
+          <label class="step-check">
+            <input type="checkbox" data-progress-key="s1" aria-label="Mark step 1 done" />
+            <span class="cbx"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 6"/></svg></span>
+          </label>
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <h3>Download the ZIP</h3>
+            <p>Click the <strong>Download</strong> button above. Save the file, then double-click it to unzip. You'll see a folder named <code>Toll</code> with a <code>manifest.json</code> inside.</p>
           </div>
         </li>
-        <li>
-          <span class="num">2</span>
-          <div>
-            <h3>Open your browser's extensions page</h3>
-            <p><code>chrome://extensions</code>, <code>brave://extensions</code>, <code>edge://extensions</code>, or <code>arc://extensions</code>.</p>
+
+        <li data-step="2">
+          <label class="step-check">
+            <input type="checkbox" data-progress-key="s2" aria-label="Mark step 2 done" />
+            <span class="cbx"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 6"/></svg></span>
+          </label>
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <h3>Open your <span data-browser-text>Chrome</span> extensions page</h3>
+            <p>Copy this address, paste it in the address bar, then press Enter.</p>
+            <div class="copy-url" data-copy-container>
+              <code class="url-target" data-browser-url>chrome://extensions</code>
+              <button class="copy-btn" type="button" data-copy-target data-copy-value="chrome://extensions" aria-label="Copy address">
+                <svg class="ic-copy" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+                <svg class="ic-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 6"/></svg>
+                <span class="copy-label">Copy</span>
+              </button>
+            </div>
           </div>
         </li>
-        <li>
-          <span class="num">3</span>
-          <div>
+
+        <li data-step="3">
+          <label class="step-check">
+            <input type="checkbox" data-progress-key="s3" aria-label="Mark step 3 done" />
+            <span class="cbx"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 6"/></svg></span>
+          </label>
+          <div class="step-num">3</div>
+          <div class="step-body">
             <h3>Turn on Developer mode</h3>
-            <p>Toggle in the top-right of the extensions page. A row of buttons appears.</p>
+            <p>Look at the top-right of the extensions page. Flip the <strong>Developer mode</strong> switch on. A new row of buttons appears.</p>
+            <div class="mini-mock" aria-hidden="true">
+              <span class="mm-label">Developer mode</span>
+              <span class="mm-switch on"><span class="mm-thumb"></span></span>
+            </div>
           </div>
         </li>
-        <li>
-          <span class="num">4</span>
-          <div>
-            <h3>Load unpacked</h3>
-            <p>Click <strong>Load unpacked</strong>. Pick the unzipped folder (the one with <code>manifest.json</code>). Toll is armed.</p>
+
+        <li data-step="4">
+          <label class="step-check">
+            <input type="checkbox" data-progress-key="s4" aria-label="Mark step 4 done" />
+            <span class="cbx"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 6"/></svg></span>
+          </label>
+          <div class="step-num">4</div>
+          <div class="step-body">
+            <h3>Click "Load unpacked" and pick the folder</h3>
+            <p>In the row that just appeared, click <strong>Load unpacked</strong>. Select the <code>Toll</code> folder you unzipped in step 1 (the one with <code>manifest.json</code> in it). That's it. Toll is armed.</p>
           </div>
         </li>
       </ol>
+
+      <div class="install-progress" aria-live="polite">
+        <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+        <span class="progress-text" id="progress-text">0 of 4 done</span>
+        <button class="reset-progress" id="reset-progress" type="button">Reset</button>
+      </div>
+
+      <div class="install-done" id="install-done" hidden>
+        <div class="done-badge">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 6"/></svg>
+        </div>
+        <div>
+          <strong>You're set.</strong>
+          <p>Open YouTube, Facebook, Instagram, or TikTok. Try to scroll a reel. See what happens.</p>
+        </div>
+      </div>
     </section>
 
     <section class="faq reveal" id="faq">
