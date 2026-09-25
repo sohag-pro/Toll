@@ -43,12 +43,19 @@
           </a>
           <a class="btn ghost lg" href="#install">See how it works</a>
         </div>
-        <div class="proof-row">
-          <div class="proof"><span class="proof-num">3</span><span class="proof-lbl">problems<br/>per unlock</span></div>
-          <div class="proof-sep"></div>
-          <div class="proof"><span class="proof-num">5→60s</span><span class="proof-lbl">escalating<br/>lockout</span></div>
-          <div class="proof-sep"></div>
-          <div class="proof"><span class="proof-num">0</span><span class="proof-lbl">servers,<br/>accounts, tracking</span></div>
+        <div class="stats">
+          <div class="stat">
+            <div class="stat-num">3</div>
+            <div class="stat-lbl">Problems per unlock</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">5<span class="arr">→</span>60<span class="unit">s</span></div>
+            <div class="stat-lbl">Escalating lockout</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">0</div>
+            <div class="stat-lbl">Servers, accounts, trackers</div>
+          </div>
         </div>
         <p class="chips">
           <span class="chip"><i class="dot yt"></i>YouTube Shorts</span>
@@ -94,7 +101,7 @@
       </div>
     </section>
 
-    <section class="features" id="features">
+    <section class="features reveal" id="features">
       <h2>What Toll does</h2>
       <div class="grid">
         <article class="card">
@@ -130,25 +137,56 @@
       </div>
     </section>
 
-    <section class="shots">
-      <h2>Here's how it looks</h2>
+    <section class="shots reveal">
+      <div class="section-head">
+        <h2>Here's how it looks</h2>
+        <p class="section-sub">Click any shot to open it full-size.</p>
+      </div>
       <div class="shot-row">
-        <figure>
-          <img src="https://raw.githubusercontent.com/sohag-pro/Toll/main/docs/screenshots/youtube-shorts.png" alt="YouTube Shorts with math gate" loading="lazy" />
+        <figure class="shot" tabindex="0" role="button" aria-label="Open YouTube Shorts screenshot full-size">
+          <div class="shot-media">
+            <img src="https://raw.githubusercontent.com/sohag-pro/Toll/main/docs/screenshots/youtube-shorts.png" alt="YouTube Shorts with math gate" loading="lazy" />
+            <span class="zoom-hint" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/><path d="M11 8v6M8 11h6"/></svg>
+              Expand
+            </span>
+          </div>
           <figcaption>YouTube Shorts. Swipe blocked, video paused, gate up.</figcaption>
         </figure>
-        <figure>
-          <img src="https://raw.githubusercontent.com/sohag-pro/Toll/main/docs/screenshots/facebook-reel.png" alt="Facebook Reels with math gate" loading="lazy" />
+        <figure class="shot" tabindex="0" role="button" aria-label="Open Facebook Reels screenshot full-size">
+          <div class="shot-media">
+            <img src="https://raw.githubusercontent.com/sohag-pro/Toll/main/docs/screenshots/facebook-reel.png" alt="Facebook Reels with math gate" loading="lazy" />
+            <span class="zoom-hint" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/><path d="M11 8v6M8 11h6"/></svg>
+              Expand
+            </span>
+          </div>
           <figcaption>Facebook Reels. Next and previous buttons intercepted too.</figcaption>
         </figure>
-        <figure>
-          <img src="https://raw.githubusercontent.com/sohag-pro/Toll/main/docs/screenshots/facebook-timeline.png" alt="Facebook timeline capped by Toll" loading="lazy" />
+        <figure class="shot" tabindex="0" role="button" aria-label="Open Facebook feed screenshot full-size">
+          <div class="shot-media">
+            <img src="https://raw.githubusercontent.com/sohag-pro/Toll/main/docs/screenshots/facebook-timeline.png" alt="Facebook timeline capped by Toll" loading="lazy" />
+            <span class="zoom-hint" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/><path d="M11 8v6M8 11h6"/></svg>
+              Expand
+            </span>
+          </div>
           <figcaption>Facebook feed capped after two screens. Solve to load more.</figcaption>
         </figure>
       </div>
     </section>
 
-    <section class="install" id="install">
+    <div id="lightbox" class="lightbox" hidden>
+      <button class="lb-close" aria-label="Close">&times;</button>
+      <button class="lb-nav prev" aria-label="Previous">&#8249;</button>
+      <button class="lb-nav next" aria-label="Next">&#8250;</button>
+      <figure class="lb-frame">
+        <img alt="" />
+        <figcaption></figcaption>
+      </figure>
+    </div>
+
+    <section class="install reveal" id="install">
       <h2>Install in about two minutes</h2>
       <p class="lede">Works in any Chromium browser: Chrome, Brave, Edge, Arc, Opera. No account, no build tools.</p>
       <ol class="steps">
@@ -183,7 +221,7 @@
       </ol>
     </section>
 
-    <section class="faq" id="faq">
+    <section class="faq reveal" id="faq">
       <h2>Questions</h2>
       <details open>
         <summary>Does it send any data anywhere?</summary>
@@ -207,7 +245,7 @@
       </details>
     </section>
 
-    <section class="tail">
+    <section class="tail reveal">
       <h2>Break the reflex.</h2>
       <p>Ninety seconds of intent between you and the next reel.</p>
       <a class="btn primary lg" href="https://github.com/sohag-pro/Toll/releases/latest" target="_blank" rel="noopener">Download Toll</a>
@@ -217,5 +255,7 @@
   <footer>
     <p>MIT licensed. Built by <a href="https://github.com/sohag-pro" target="_blank" rel="noopener">@sohag-pro</a>. <a href="https://github.com/sohag-pro/Toll" target="_blank" rel="noopener">Source on GitHub</a>.</p>
   </footer>
+
+  <script src="./script.js" defer></script>
 </body>
 </html>
