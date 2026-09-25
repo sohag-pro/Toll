@@ -103,20 +103,20 @@
   });
 })();
 
-// Subtle parallax on hero phone
+// Subtle parallax on hero laptop
 (() => {
-  const phone = document.querySelector(".phone");
-  if (!phone) return;
+  const target = document.querySelector(".laptop");
+  if (!target) return;
   const media = window.matchMedia("(prefers-reduced-motion: reduce)");
   if (media.matches) return;
-  const art = phone.parentElement;
+  const art = target.parentElement;
   art.addEventListener("mousemove", (e) => {
     const r = art.getBoundingClientRect();
     const dx = ((e.clientX - r.left) / r.width - 0.5) * 8;
     const dy = ((e.clientY - r.top) / r.height - 0.5) * 8;
-    phone.style.transform = `translate3d(${dx}px, ${dy}px, 0)`;
+    target.style.transform = `translate3d(${dx}px, ${dy}px, 0)`;
   });
   art.addEventListener("mouseleave", () => {
-    phone.style.transform = "";
+    target.style.transform = "";
   });
 })();
